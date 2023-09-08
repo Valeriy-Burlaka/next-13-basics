@@ -2,6 +2,22 @@ import styles from "./Notes.module.css";
 
 const NOTES_API = `${process.env.BACKEND_API_URL}/collections/notes/records?page=1&perPage=30`;
 
+// We could use Pocketbase SDK instead of `fetch`, like this:
+// ```
+// import { PocketBase } from "pocketbase";
+//
+// const db = new PocketBase('http://127.0.0.1:8090');
+// const result = await db.records.getList('notes');
+// ```
+//
+// , but in this case we would need to set the cache behavior using Next variables:
+//
+// export const dynamic = 'auto',
+//   dynamicParams = true,
+//   revalidate = 0,
+//   fetchCache = 'auto',
+//   runtime = 'nodejs',
+//   preferredRegion = 'auto'
 async function getNotes() {
   console.log("LOG:: Fetching notes from URL:", NOTES_API);
   const response = await fetch(NOTES_API, { cache: "no-cache" });
