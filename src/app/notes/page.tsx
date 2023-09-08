@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import CreateNote from "./CreateNote";
+
 import styles from "./Notes.module.css";
 
 // We could use Pocketbase SDK instead of `fetch`, like this:
@@ -40,6 +42,8 @@ export default async function NotesPage() {
           return <Note key={note.id} note={note} />;
         })}
       </div>
+
+      <CreateNote />
     </div>
   );
 }
