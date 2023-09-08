@@ -1,6 +1,6 @@
-import styles from "./Notes.module.css";
+import Link from "next/link";
 
-const NOTES_API = `${process.env.BACKEND_API_URL}/collections/notes/records?page=1&perPage=30`;
+import styles from "./Notes.module.css";
 
 // We could use Pocketbase SDK instead of `fetch`, like this:
 // ```
@@ -19,8 +19,10 @@ const NOTES_API = `${process.env.BACKEND_API_URL}/collections/notes/records?page
 //   runtime = 'nodejs',
 //   preferredRegion = 'auto'
 async function getNotes() {
-  console.log("LOG:: Fetching notes from URL:", NOTES_API);
-  const response = await fetch(NOTES_API, { cache: "no-cache" });
+  const response = await fetch(
+    `${process.env.DATA_API_URL}/notes/records?page=1&perPage=30`,
+    { cache: "no-store" }
+  );
   console.log("LOG:: Fetch response:", response);
   const data = await response.json();
   return data?.items as any[];
@@ -46,10 +48,12 @@ function Note({ note }: { note: any }) {
   const { id, title, content, created } = note || {};
 
   return (
-    <div className={styles.note}>
-      <h2>{title}</h2>
-      <h5>{content}</h5>
-      <p>{created}</p>
-    </div>
+    <Link href={`/notes/${id}`}>
+      <div className={styles.note}>
+        <h2>{title}</h2>
+        <h5>{content}</h5>
+        <p>{created}</p>
+      </div>
+    </Link>
   );
 }
