@@ -23,8 +23,8 @@ export default function RootLayout({
             <Link href="/">Home</Link>
             <Link href="/notes">Notes</Link>
           </nav>
+          {children}
         </main>
-        {children}
       </body>
     </html>
   );
