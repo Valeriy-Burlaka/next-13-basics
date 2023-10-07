@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev:all": "concurrently \"npm run db:start\" \"npm run dev\" --names \" 💾 , 🌍 \" --prefix name --kill-others --prefix-colors \"yellow,cyan\"",
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
@@ -22,5 +23,8 @@
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1"
   }
 }
